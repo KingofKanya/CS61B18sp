@@ -84,6 +84,9 @@ public class IntList {
         //TODO:  fill in method
 
         //using iteration
+        if(A == null){
+            return B;
+        }
         IntList t = A;
         while(t.rest != null){
             t = t.rest;
@@ -103,6 +106,9 @@ public class IntList {
         //TODO:  fill in method
 
         //using recursion
+        if(A == null){
+            return B;
+        }
         if(A.rest == null){
             return new IntList(A.first, B);
         }
