@@ -1,5 +1,5 @@
 public class LinkedListDeque<T> {
-    public class Node{
+    public class Node {
         public T item;
         public Node prev;
         public Node next;
@@ -15,7 +15,7 @@ public class LinkedListDeque<T> {
     private Node first;
     private Node last;
 
-    public LinkedListDeque(){
+    public LinkedListDeque() {
         size = 0;
         first = new Node(null, null, null);
         last = new Node(first, null, first);
@@ -39,7 +39,7 @@ public class LinkedListDeque<T> {
 
     public void printDeque() {
         Node p = first.next;
-        while(p.item != null){
+        while (p.item != null) {
             System.out.print(p.item);
             p = p.next;
         }
@@ -56,37 +56,37 @@ public class LinkedListDeque<T> {
         last.prev = last.prev.prev;
         size++;
     }
-    
-    public boolean isEmpty(){
+
+    public boolean isEmpty() {
         return size == 0;
     }
 
-    public int size(){
+    public int size() {
         return size;
     }
 
     public T get(int index) {
-        if(index < 0 || index >= size){
+        if (index < 0 || index >= size) {
             return null;
         }
         int x = -1;
         Node n = first;
-        while(x < index){
+        while (x < index) {
             x++;
             n = n.next;
         }
         return n.item;
     }
 
-    public T getRecursiveHelper(Node n, int index){
-        if (index == 0){
+    public T getRecursiveHelper(Node n, int index) {
+        if (index == 0) {
             return n.item;
         }
         return getRecursiveHelper(n.next, index - 1);
     }
 
-    public T getRecursive(int index){
-        if(index < 0 || index >= size){
+    public T getRecursive(int index) {
+        if (index < 0 || index >= size) {
             return null;
         }
         return getRecursiveHelper(first.next, index);

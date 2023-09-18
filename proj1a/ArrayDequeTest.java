@@ -34,24 +34,24 @@ public class ArrayDequeTest {
     }
 
     @Test
-    public void testgrowshrink(){
+    public void testgrowshrink() {
         ArrayDeque<Integer> dq = new ArrayDeque<>();
-        for(int i = 0;i < 7;i++){
+        for (int i = 0; i < 7; i++) {
             dq.addLast(i);
         }
         assertEquals(8, dq.getLength());
         dq.addLast(7);
         assertEquals(16, dq.getLength());
-        for(int i = 0;i < 3;i++){
+        for (int i = 0; i < 3; i++) {
             dq.addLast(i);
         }
         assertEquals(16, dq.getLength());
-        for(int i = 0;i < 15;i++){
+        for (int i = 0; i < 15; i++) {
             dq.addLast(i);
         }
         assertEquals(32, dq.getLength());
 
-        for(int i = 0;i < 17;i++){
+        for (int i = 0; i < 17; i++) {
             dq.removeFirst();
         }
         assertEquals(32, dq.getLength());
@@ -75,8 +75,8 @@ public class ArrayDequeTest {
     }
 
     @Test
-    public void testisEmpty(){
-        ArrayDeque<String> arrayDeque= new ArrayDeque<>();
+    public void testisEmpty() {
+        ArrayDeque<String> arrayDeque = new ArrayDeque<>();
         assertTrue(arrayDeque.isEmpty());
     }
 }
