@@ -1,0 +1,42 @@
+problem 4.1
+
+//recursive
+if(L == null){
+    return L;
+}
+IntList res = new IntList(L.first * L.first, IntList.square(L.rest));
+return res;
+
+//iteratively
+if(L != null){
+    return L;
+}
+IntList res = new IntList(L.first * L.first, null);
+IntList B = L.rest;
+IntList C = res;
+while(B != null){
+    C.rest =  new IntList(B.first * B.first, null);
+    B = B.rest;
+    C = C.rest;
+}
+return res;
+
+
+##################
+
+//recursively
+if(L == null){
+    return L;
+}
+L.first *= L.first;
+squareMutative(L.rest);
+return L;
+
+
+//iteratively
+IntList B = L;
+while(B != null){
+    B.first *= B.first;
+    B = B.rest;
+}
+return B;
