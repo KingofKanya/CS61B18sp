@@ -17,10 +17,6 @@ public class ArrayDeque<T> {
     private int last;
     private T[] array;
 
-    public int getLength() {
-        return length;
-    }
-
     /**
      * create an empty array deque
      */
