@@ -1,5 +1,3 @@
-import java.lang.reflect.Array;
-
 /**
  * Array based list.
  *
