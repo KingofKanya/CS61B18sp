@@ -20,6 +20,7 @@ public class ArrayDeque<T> {
     /**
      * create an empty array deque
      */
+    @SuppressWarnings("unchecked")
     public ArrayDeque() {
         size = 0;
         length = 8;
@@ -49,6 +50,7 @@ public class ArrayDeque<T> {
         return index + 1;
     }
 
+    @SuppressWarnings("unchecked")
     private void shrink() {
         //System.out.println("####");
         T[] newArray = (T[]) new Object[length / 2];
@@ -65,6 +67,7 @@ public class ArrayDeque<T> {
         length /= 2;
     }
 
+    @SuppressWarnings("unchecked")
     private void grow() {
         T[] newArray = (T[]) new Object[length * 2];
         int ptr1 = front;
