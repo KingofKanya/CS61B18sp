@@ -2,7 +2,7 @@ import static java.lang.Math.sqrt;
 import static java.lang.Math.pow;
 
 public class Planet {
-    public static final double G = 6.67e-11;
+    private static final double G = 6.67e-11;
     public double xxPos;
     public double yyPos;
     public double xxVel;
@@ -37,20 +37,12 @@ public class Planet {
 
     public double calcForceExertedByX(Planet p){
         double dx = p.xxPos - this.xxPos;
-        double res = calcForceExertedBy(p) * dx / calcDistance(p);
-        if(res > 0){
-            return res;
-        }
-        return -res;
+        return calcForceExertedBy(p) * dx / calcDistance(p);
     }
 
     public double calcForceExertedByY(Planet p){
         double dy = p.yyPos - this.yyPos;
-        double res = calcForceExertedBy(p) * dy / calcDistance(p);
-        if(res > 0){
-            return res;
-        }
-        return -res;
+        return calcForceExertedBy(p) * dy / calcDistance(p);
     }
 
     public double calcNetForceExertedByX(Planet[] arr){
