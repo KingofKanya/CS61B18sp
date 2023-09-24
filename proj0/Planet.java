@@ -3,12 +3,12 @@ import static java.lang.Math.pow;
 
 public class Planet {
     public static final double G = 6.67e-11;
-    double xxPos;
-    double yyPos;
-    double xxVel;
-    double yyVel;
-    double mass;
-    String imgFileName;
+    public double xxPos;
+    public double yyPos;
+    public double xxVel;
+    public double yyVel;
+    public double mass;
+    public String imgFileName;
     public Planet(double xP, double yP, double xV,
                   double yV, double m, String img){
         xxPos = xP;
@@ -36,7 +36,7 @@ public class Planet {
     }
 
     public double calcForceExertedByX(Planet p){
-        double dx = this.xxPos - p.xxPos;
+        double dx = p.xxPos - this.xxPos;
         double res = calcForceExertedBy(p) * dx / calcDistance(p);
         if(res > 0){
             return res;
@@ -45,7 +45,7 @@ public class Planet {
     }
 
     public double calcForceExertedByY(Planet p){
-        double dy = this.yyPos - p.yyPos;
+        double dy = p.yyPos - this.yyPos;
         double res = calcForceExertedBy(p) * dy / calcDistance(p);
         if(res > 0){
             return res;
