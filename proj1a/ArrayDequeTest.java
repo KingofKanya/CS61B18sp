@@ -9,7 +9,7 @@ public class ArrayDequeTest {
     @Test
     public void testaddsizeempty() {
         ArrayDeque<String> dq = new ArrayDeque<>();
-        assertEquals(true, dq.isEmpty());
+        assertTrue(dq.isEmpty());
 
         dq.addFirst("first");
         assertEquals(1, dq.size());

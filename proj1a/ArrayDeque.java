@@ -119,10 +119,9 @@ public class ArrayDeque<T> {
             return null;
         }
         int ptr = front + index;
-        if (ptr > length) {
+        if (ptr >= length) {
             ptr -= length;
         }
-        ptr--;
         return array[ptr];
     }
 
