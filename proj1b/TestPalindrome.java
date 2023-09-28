@@ -1,4 +1,5 @@
 import org.junit.Test;
+
 import static org.junit.Assert.*;
 
 public class TestPalindrome {
@@ -28,7 +29,7 @@ public class TestPalindrome {
     }
 
     @Test
-    public void testOverloadIsPalindrome(){
+    public void testOverloadIsPalindrome() {
         CharacterComparator m = new OffByOne();
         assertTrue(palindrome.isPalindrome("", m));
         assertTrue(palindrome.isPalindrome("a", m));

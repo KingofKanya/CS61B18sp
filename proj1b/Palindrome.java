@@ -29,7 +29,7 @@ public class Palindrome {
 //        return true;
 //    }
 
-    public boolean isPalindrome(String word, CharacterComparator cc){
+    public boolean isPalindrome(String word, CharacterComparator cc) {
         int len = word.length();
         if (len < 2) return true;
         for (int i = 0; i < len / 2; i++) {
