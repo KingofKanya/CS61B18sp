@@ -93,8 +93,8 @@
 //    }
 //}
 
-public class LinkedListDeque<T>{
-    public class Node {
+public class LinkedListDeque<T> {
+    private class Node {
         private T item;
         private Node prev;
         private Node next;
@@ -106,7 +106,7 @@ public class LinkedListDeque<T>{
         }
 
         /* constructor for Node.(especially for sentinel node). */
-        public Node(Node p, Node n){
+        public Node(Node p, Node n) {
             prev = p;
             next = n;
         }
@@ -144,8 +144,11 @@ public class LinkedListDeque<T>{
         }
     }
 
+    /**
+     * @return the first item that be moved.
+     */
     public T removeFirst() {
-        if (size() == 0){
+        if (size() == 0) {
             return null;
         }
         T res = sentinel.next.item;
@@ -155,14 +158,17 @@ public class LinkedListDeque<T>{
         return res;
     }
 
+    /**
+     * @return return the last item be moved
+     */
     public T removeLast() {
-        if (size() == 0){
+        if (size() == 0) {
             return null;
         }
         T res = sentinel.prev.item;
         sentinel.prev.prev.next = sentinel;
         sentinel.prev = sentinel.prev.prev;
-        size++;
+        size--;
         return res;
     }
 
@@ -187,7 +193,7 @@ public class LinkedListDeque<T>{
         return n.item;
     }
 
-    public T getRecursiveHelper(Node n, int index) {
+    private T getRecursiveHelper(Node n, int index) {
         if (index == 0) {
             return n.item;
         }
