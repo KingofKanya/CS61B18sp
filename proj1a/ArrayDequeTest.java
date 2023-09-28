@@ -1,4 +1,5 @@
 import org.junit.Test;
+
 import java.lang.reflect.Field;
 
 import static org.junit.Assert.assertEquals;
@@ -81,9 +82,11 @@ public class ArrayDequeTest {
         for (int i = 0; i < 40; i++) {
             dq.removeLast();
         }
-        System.out.println("size:" + dq.size() + ",length:" + (int) privateField.get(dq) + ",length / size:" + (int) privateField.get(dq) / dq.size());
+        System.out.println("size:" + dq.size() + ",length:" + (int) privateField.get(dq) +
+                ",length / size:" + (int) privateField.get(dq) / dq.size());
         dq.removeLast();
-        System.out.println("size:" + dq.size() + ",length:" + (int) privateField.get(dq) + ",length / size:" + (int) privateField.get(dq) / dq.size());
+        System.out.println("size:" + dq.size() + ",length:" + (int) privateField.get(dq) +
+                ",length / size:" + (int) privateField.get(dq) / dq.size());
         assertEquals(64, (int) privateField.get(dq));
 
     }
