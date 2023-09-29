@@ -9,7 +9,9 @@ public class Palindrome {
 
     public boolean isPalindrome(String word) {
         int len = word.length();
-        if (len < 2) return true;
+        if (len < 2) {
+            return true;
+        }
         for (int i = 0; i < len / 2; i++) {
             if (word.charAt(i) != word.charAt(len - 1 - i)) {
                 return false;
@@ -31,7 +33,9 @@ public class Palindrome {
 
     public boolean isPalindrome(String word, CharacterComparator cc) {
         int len = word.length();
-        if (len < 2) return true;
+        if (len < 2) {
+            return true;
+        }
         for (int i = 0; i < len / 2; i++) {
             if (!cc.equalChars(word.charAt(i), word.charAt(len - 1 - i))) {
                 return false;
