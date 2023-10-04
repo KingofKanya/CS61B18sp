@@ -1,6 +1,7 @@
 // TODO: Make sure to make this class a part of the synthesizer package
 // package <package name>;
 package synthesizer;
+
 import edu.princeton.cs.algs4.In;
 
 import java.util.Iterator;
@@ -23,6 +24,7 @@ public class ArrayRingBuffer<T> extends AbstractBoundedQueue<T> {
 
     private class ArrayRingBufferIterator implements Iterator<T> {
         int pos = first;
+
         @Override
         public boolean hasNext() {
             first = plusOne(first);
@@ -46,7 +48,7 @@ public class ArrayRingBuffer<T> extends AbstractBoundedQueue<T> {
      * return index plus one
      */
     private int minusOne(int index) {
-        if(index > 0){
+        if (index > 0) {
             return index - 1;
         }
         return rb.length - 1;
