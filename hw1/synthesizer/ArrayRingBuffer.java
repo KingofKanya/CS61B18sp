@@ -104,6 +104,9 @@ public class ArrayRingBuffer<T> extends AbstractBoundedQueue<T> {
      * Return oldest item, but don't remove it.
      */
     public T peek() {
+        if (fillCount == 0) {
+            throw new RuntimeException("There is no item to peek.");
+        }
         return rb[first];
         // TODO: Return the first item. None of your instance variables should change.
     }
@@ -119,15 +122,4 @@ public class ArrayRingBuffer<T> extends AbstractBoundedQueue<T> {
     public int fillCount() {
         return fillCount;
     }
-
-    @Override
-    public boolean isEmpty() {
-        return fillCount == 0;
-    }
-
-    @Override
-    public boolean isFull() {
-        return fillCount == rb.length;
-    }
-
 }
