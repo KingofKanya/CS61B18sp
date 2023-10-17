@@ -49,7 +49,7 @@ public class TestArrayDequeGold {
             }else{
                 int correct = ads.removeLast();
                 int student = sad.removeLast();
-                assertEquals("RemoveLast + student was " + student + ", correct was " + correct
+                assertEquals("RemoveLast(), student was " + student + ", correct was " + correct
                         ,correct, student);
             }
             assertEquals(ads.isEmpty(), sad.isEmpty());
