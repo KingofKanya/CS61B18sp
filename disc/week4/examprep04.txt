@@ -1,1 +1,58 @@
 1
+
+Compile-Error
+Compile-Error
+D
+E
+
+C
+B
+C
+B   solution中的答案错选c
+
+让我们再次分析 **d.bark(c);** 这个调用：
+
+- `d` 的静态类型是 `Dog`，但它的实际运行时类型是 `Corgi`。
+- 当调用 `d.bark(c)` 时，尽管 `d` 的静态类型是 `Dog`，但由于其动态类型（实际对象类型）是 `Corgi`，因此会在 `Corgi` 类中查找与给定参数最匹配的方法。
+- 在 `Corgi` 类中，有两个版本的 `bark` 方法：`bark(Dog d)` 和 `bark(Corgi c)`。因为传递给方法的参数 `c` 的类型是 `Corgi`，所以 `bark(Corgi c)` 是最匹配的方法。
+- 因此，应该调用 `Corgi` 类中的 `bark(Corgi c)` 方法。
+
+结论：答案应该是 Method B。图中的答案确实是错误的
+
+2
+Compilation Error
+runs successfully
+Compilation Error
+Compilation Error
+
+runs successfully
+runs successfully
+runtime Error
+Compilation Error
+Compilation Error
+
+3
+public class SLListVista extends SLList{
+    @Override
+    public int indexOf(int x){
+        int n = super.indexOf(x);
+        if(n == -1){
+            throw new NoSuchElementException();
+        }
+        return n;
+    }
+}
+
+4
+
+new LastIntNode
+
+public class LastIntNode extends IntNode{
+    public LastIntNode(){
+        super(0, null);
+    }
+    @Override
+    public int max(){
+        return 0;
+    }
+}
