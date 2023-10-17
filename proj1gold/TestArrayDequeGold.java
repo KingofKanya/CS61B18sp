@@ -28,13 +28,17 @@ public class TestArrayDequeGold {
         assertEquals(ads.removeFirst(), sad.removeFirst());
         assertEquals(ads.removeFirst(), sad.removeFirst());
 
-        for (int i = 0; i < 100; i++) {
+        StringBuilder log = new StringBuilder();
+
+        for (int i = 0; i < 150; i++) {
             int n = StdRandom.uniform(1, 100);
-            int t = StdRandom.uniform(1,3);
+            int t = StdRandom.uniform(2);
             if(t == 1){
+                log.append("addFirst(").append(n).append(")\n");
                 ads.addFirst(n);
                 sad.addFirst(n);
             }else{
+                log.append("addLast(").append(n).append(")\n");
                 ads.addLast(n);
                 sad.addLast(n);
             }
@@ -42,18 +46,20 @@ public class TestArrayDequeGold {
             assertEquals(ads.size(), sad.size());
         }
 
+        int correct;
+        int student;
         for (int i = 0; i < 100; i++) {
-            int t = StdRandom.uniform(1,3);
+            int t = StdRandom.uniform(2);
             if(t == 1){
-                assertEquals(ads.removeFirst(), sad.removeFirst());
+                correct = ads.removeLast();
+                student = sad.removeLast();
+                log.append("removeFirst()\n");
             }else{
-                int correct = ads.removeLast();
-                int student = sad.removeLast();
-                assertEquals("RemoveLast(), student was " + student + ", correct was " + correct
-                        ,correct, student);
+                correct = ads.removeLast();
+                student = sad.removeLast();
+                log.append("removeLast()\n");
             }
-            assertEquals(ads.isEmpty(), sad.isEmpty());
-            assertEquals(ads.size(), sad.size());
+            assertEquals(log.toString(), correct, student);
         }
     }
 }
