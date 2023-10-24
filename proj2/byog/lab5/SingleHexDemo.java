@@ -5,7 +5,7 @@ import byog.TileEngine.TETile;
 import byog.TileEngine.Tileset;
 
 
-public class HexWorldDemo {
+public class SingleHexDemo {
     private static final int WIDTH = 50;
     private static final int HEIGHT = 50;
 
@@ -16,8 +16,9 @@ public class HexWorldDemo {
         TETile[][] tiles = new TETile[WIDTH][HEIGHT];
         fillArea(tiles);
 
-        HexWorld hexWorld = new HexWorld();
-        hexWorld.addTesselationHexagons(tiles);
+        Position p = new Position(24, 0);
+        SingleHex singleHex = new SingleHex();
+        singleHex.addHexagon(p, 4, tiles);
 
         ter.renderFrame(tiles);
     }
