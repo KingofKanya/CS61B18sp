@@ -1,0 +1,29 @@
+2.1.c
+Using two stacks, one for each button. Each time you visit a new web 
+page, add the previous page to the back button's stack. When you click 
+the back button, add the current page to the forward button stack, and 
+pop a page from the back button stack.When you click the forward 
+button, add the current page to the back button stack, add pop a page
+from the forward button stack.Finally, when you visit a new page, clear
+the forward button stack.
+
+2.3
+class Queue()<E> {
+    private Stack<E> stack = new Stack();
+
+    public void push(E element){
+        stack.push(element);
+    }
+
+    public void poll(E element){
+        Stack<E> temp = new Stack<E>();
+        while(!stack.isEmpty()) {
+            temp.push(stack.pop());
+        }
+        E toPop = temp.pop();
+        while(!temp.isEmpty()){
+            stack.push(temp.pop());
+        }
+        return toPop;
+    }
+}
