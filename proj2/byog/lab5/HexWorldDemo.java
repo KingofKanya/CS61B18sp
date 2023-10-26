@@ -13,13 +13,13 @@ public class HexWorldDemo {
         TERenderer ter = new TERenderer();
         ter.initialize(WIDTH, HEIGHT);
 
-        TETile[][] tiles = new TETile[WIDTH][HEIGHT];
-        fillArea(tiles);
+        TETile[][] teTiles = new TETile[WIDTH][HEIGHT];
+        fillArea(teTiles);
 
         HexWorld hexWorld = new HexWorld();
-        hexWorld.addTesselationHexagons(tiles);
+        hexWorld.addTesselationHexagons(teTiles);
 
-        ter.renderFrame(tiles);
+        ter.renderFrame(teTiles);
     }
 
     private static void fillArea(TETile[][] tiles) {
