@@ -11,7 +11,7 @@ public class TestGame {
     public static final int HEIGHT = 30;
 
     @Test
-    public void generateWorldTest() {
+    public void generateWorldTest(){
         Game game = new Game();
         TERenderer ter = new TERenderer();
         ter.initialize(WIDTH, HEIGHT);
@@ -19,8 +19,11 @@ public class TestGame {
         TETile[][] teTile = game.generateWorld(1234);
 
         ter.renderFrame(teTile);
-        while (true) {
-            // 为了页面不闪退
+
+        try {
+            Thread.sleep(1000000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
         }
     }
 
@@ -30,11 +33,14 @@ public class TestGame {
         TERenderer ter = new TERenderer();
         ter.initialize(WIDTH, HEIGHT);
 
-        TETile[][] teTile = game.playWithInputString("n1234s");
+        TETile[][] teTile = game.playWithInputString("n23s");
 
         ter.renderFrame(teTile);
-        while (true) {
-            // 为了页面不闪退
+
+        try {
+            Thread.sleep(1000000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
         }
     }
 
@@ -47,11 +53,14 @@ public class TestGame {
         TETile[][] world = new TETile[WIDTH][HEIGHT];
         game.fillArea(world);
 
-        game.generateLHallway(2, 1, 10, 9, world);
+        game.generateLHallway(71, 11, 9, 3, world);
 
         ter.renderFrame(world);
-        while (true) {
-            // 为了页面不闪退
+
+        try {
+            Thread.sleep(1000000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
         }
     }
 }

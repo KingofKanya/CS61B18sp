@@ -11,8 +11,8 @@ public class Game {
     /* Feel free to change the width and height. */
     public static final int WIDTH = 80;
     public static final int HEIGHT = 30;
-    public final Random random = new Random();
-    public Room[] rooms;
+    private final Random random = new Random();
+    private Room[] rooms;
 
     /**
      * Method used for playing a fresh game. The game should start from the main menu.
@@ -34,7 +34,7 @@ public class Game {
      * @return the 2D TETile[][] representing the state of the world
      */
     public TETile[][] playWithInputString(String input) {
-        // TODO: Fill out this method to run the game using the input passed in,
+        // Fill out this method to run the game using the input passed in,
         // and return a 2D tile representation of the world that would have been
         // drawn if the same inputs had been given to playWithKeyboard().
 
@@ -73,7 +73,6 @@ public class Game {
 
         random.setSeed(seed);
 
-        //rooms = generateRooms(4, world);
         rooms = generateRooms(random.nextInt(10) + 10, world);
         connectRooms(rooms, world);
         generateWall(world);
@@ -120,43 +119,45 @@ public class Game {
     }
 
     public void connectTwoRooms(Room room1, Room room2, TETile[][] world) {
-        System.out.println("connect");
+        System.out.println("\nconnect");
         System.out.println(room1.toString());
         System.out.println(room2.toString());
-        int x1 = room1.x + random.nextInt(room1.width) - 1;
-        int y1 = room1.y + random.nextInt(room1.height) - 1;
-        int x2 = room2.x + random.nextInt(room2.width) - 1;
-        int y2 = room2.y + random.nextInt(room2.height) - 1;
-        int min_x = Math.min(x1, x2);
-        int min_y = Math.min(y1, y2);
-        int max_x = Math.max(x1, x2);
-        int max_y = Math.max(y1, y2);
+        int x1 = room1.x + random.nextInt(room1.width);
+        int y1 = room1.y + random.nextInt(room1.height);
+        int x2 = room2.x + random.nextInt(room2.width);
+        int y2 = room2.y + random.nextInt(room2.height);
 
-        int x = random.nextInt(2);
-        if (x < 100) {
-            generateLHallway(min_x, min_y, max_x, max_y, world);
-        } else {
+        System.out.println("(" + x1 + "," + y1 + ")   " + "(" + x2 + "," + y2 + ")   ");
 
-        }
+        generateLHallway(x1, y1, x2, y2, world);
     }
 
-    public void generateLHallway(int min_x, int min_y, int max_x, int max_y, TETile[][] world) {
-        int p = random.nextInt(2);
-        if (p == 0) {
-            //左下
+    public void generateLHallway(int x1, int y1, int x2, int y2, TETile[][] world) {
+        int x3;
+        int y3;
+        if (random.nextInt(2) == 0) {
+            x3 = x1;
+            y3 = y2;
+        } else {
+            x3 = x2;
+            y3 = y1;
+        }
+        generateLine(x1, y1, x3, y3, world);
+        generateLine(x2, y2, x3, y3, world);
+    }
+
+    private void generateLine(int x1, int y1, int x2, int y2, TETile[][] world) {
+        if (x1 == x2) {
+            int min_y = Math.min(y1, y2);
+            int max_y = Math.max(y1, y2);
             for (int i = min_y; i <= max_y; i++) {
-                world[min_x][i] = Tileset.FLOOR;
-            }
-            for (int i = min_x; i <= max_x; i++) {
-                world[i][min_y] = Tileset.FLOOR;
+                world[x1][i] = Tileset.FLOOR;
             }
         } else {
-            //右上
+            int min_x = Math.min(x1, x2);
+            int max_x = Math.max(x1, x2);
             for (int i = min_x; i <= max_x; i++) {
-                world[i][max_y] = Tileset.FLOOR;
-            }
-            for (int i = min_y; i <= max_y; i++) {
-                world[max_x][i] = Tileset.FLOOR;
+                world[i][y1] = Tileset.FLOOR;
             }
         }
     }
@@ -173,8 +174,8 @@ public class Game {
     public Room generateRoom(TETile[][] world) {
         int width = random.nextInt(9) + 1;
         int height = random.nextInt(9) + 1;
-        int x = random.nextInt(WIDTH - width) + 1;
-        int y = random.nextInt(HEIGHT - height) + 1;
+        int x = random.nextInt(WIDTH - width - 1) + 1;
+        int y = random.nextInt(HEIGHT - height - 1) + 1;
         Room room = new Room(width, height, x, y);
         System.out.println(room.toString());
         fillRoom(room, world);
