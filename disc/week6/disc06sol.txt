@@ -1,0 +1,26 @@
+1
+Rock
+
+2
+2.a
+public static void main(String[] args){
+    try{
+        BadIntergerStack stack = new BadIntergerStack();
+        stack.pop();
+    }catch(NullPointerException e){
+        System.out.println("Sucess!");
+    }
+}
+2.b
+public static void main(String[] args){
+    BadIntergerStack stack = new BadIntergerStack();
+    stack.push(1);
+    stack.top.prev = stack.top;
+    while(!stack.isEmpty()){
+        stack.pop();
+    }
+    System.out.println("This print statement is unreachable!");
+}
+2.c
+make top private
+

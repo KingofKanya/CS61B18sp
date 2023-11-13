@@ -3,6 +3,7 @@ package byog.Core;
 import byog.TileEngine.TERenderer;
 import byog.TileEngine.TETile;
 import byog.TileEngine.Tileset;
+import edu.princeton.cs.algs4.StdDraw;
 
 import java.util.Random;
 
@@ -13,11 +14,76 @@ public class Game {
     public static final int HEIGHT = 30;
     private final Random random = new Random();
     private Room[] rooms;
+    private Player player;
 
     /**
      * Method used for playing a fresh game. The game should start from the main menu.
      */
     public void playWithKeyboard() {
+        TETile[][] world = generateWorld(1234);
+        this.player = generatePlayer(world);
+        ter.renderFrame(world);
+
+        while (true) {
+            if (StdDraw.hasNextKeyTyped()) {
+                char key = StdDraw.nextKeyTyped();
+                handleKeyPress(key, world);
+                ter.renderFrame(world);
+            }
+        }
+    }
+
+    /**
+     * 处理按键事件
+     *
+     * @param key
+     * @param world
+     */
+    public void handleKeyPress(char key, TETile[][] world) {
+        int x = player.x;
+        int y = player.y;
+        if (key == 'W' || key == 'w') {
+            System.out.println("w");
+            if (y + 1 < HEIGHT && world[x][y] == Tileset.FLOOR) {
+                world[x][y] = Tileset.FLOOR;
+                world[x][y + 1] = Tileset.PLAYER;
+                player.y++;
+            }
+        } else if (key == 'S' || key == 's') {
+            System.out.println("s");
+            if (y - 1 > 0 && world[x][y] == Tileset.FLOOR) {
+                world[x][y] = Tileset.FLOOR;
+                world[x][y - 1] = Tileset.PLAYER;
+                player.y--;
+            }
+        } else if (key == 'A' || key == 'a') {
+            System.out.println("a");
+            if (x - 1 > 0 && world[x][y] == Tileset.FLOOR) {
+                world[x][y] = Tileset.FLOOR;
+                world[x - 1][y] = Tileset.PLAYER;
+                player.x--;
+            }
+        } else if (key == 'D' || key == 'd') {
+            System.out.println("d");
+            if (x + 1 < WIDTH && world[x][y] == Tileset.FLOOR) {
+                world[x][y] = Tileset.FLOOR;
+                world[x + 1][y] = Tileset.PLAYER;
+                player.x++;
+            }
+        }
+    }
+
+
+    private Player generatePlayer(TETile[][] world) {
+        int x = random.nextInt(WIDTH);
+        int y = random.nextInt(HEIGHT);
+        while (world[x][y] != Tileset.FLOOR) {
+            x = random.nextInt(WIDTH);
+            y = random.nextInt(HEIGHT);
+        }
+        world[x][y] = Tileset.PLAYER;
+        System.out.println("generate player at (" + x + "," + y + ")");
+        return new Player(x, y);
     }
 
     /**

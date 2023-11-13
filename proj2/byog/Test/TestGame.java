@@ -16,7 +16,7 @@ public class TestGame {
         TERenderer ter = new TERenderer();
         ter.initialize(WIDTH, HEIGHT);
 
-        TETile[][] teTile = game.generateWorld(1234);
+        TETile[][] teTile = game.generateWorld(343);
 
         ter.renderFrame(teTile);
 
@@ -33,7 +33,7 @@ public class TestGame {
         TERenderer ter = new TERenderer();
         ter.initialize(WIDTH, HEIGHT);
 
-        TETile[][] teTile = game.playWithInputString("n23s");
+        TETile[][] teTile = game.playWithInputString("n23342s");
 
         ter.renderFrame(teTile);
 
@@ -56,6 +56,21 @@ public class TestGame {
         game.generateLHallway(71, 11, 9, 3, world);
 
         ter.renderFrame(world);
+
+        try {
+            Thread.sleep(1000000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Test
+    public void playWithKeyboardTest(){
+        Game game = new Game();
+        TERenderer ter = new TERenderer();
+        ter.initialize(WIDTH, HEIGHT);
+
+        game.playWithKeyboard();
 
         try {
             Thread.sleep(1000000);

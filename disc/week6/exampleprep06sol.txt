@@ -1,0 +1,29 @@
+1
+mystery of 1 is 0
+3
+counter is 1
+1
+counter is 2
+mystery of 1 is 2
+
+2
+public AltList<Y,X> pairsSwapped(){
+    AltList<Y,X> ret = new AltList<Y,X>(next.item, new AltList<X,Y>(item,null));
+    if(next.next != null){
+        ret.next.next = next.next.pairsSwapped();
+    }
+    return ret;
+}
+
+3
+public Integer next(){
+    if(curList == null){
+        throw new NoSuchElementException();
+    }
+    Integer toReturn = curList.head;
+    for(int i = 0;i < k && curList != null;i++){
+        curList = curList.tail;
+    }
+    hasNext = (curList != null);
+    return toReturn;
+}
