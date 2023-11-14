@@ -108,7 +108,7 @@ public class MemoryGame {
             drawFrame(input);
         }
         StdDraw.pause(500);
-        return input;
+        return null;
     }
 
     public void startGame() {

@@ -78,4 +78,38 @@ public class TestGame {
             throw new RuntimeException(e);
         }
     }
+
+    @Test
+    public void startFrameTest(){
+        Game game = new Game();
+        TERenderer ter = new TERenderer();
+        ter.initialize(WIDTH, HEIGHT);
+
+        game.startFrame();
+
+        System.out.println("seed: " + game.seed);
+
+        try {
+            Thread.sleep(1000000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Test
+    public void gameFrameTest(){
+        Game game = new Game();
+        TERenderer ter = new TERenderer();
+        ter.initialize(WIDTH, HEIGHT);
+
+        game.gameFrame();
+
+        try {
+            Thread.sleep(1000000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 }
+

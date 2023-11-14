@@ -3,11 +3,14 @@ package byog.Core;
 import byog.TileEngine.TERenderer;
 import byog.TileEngine.TETile;
 import byog.TileEngine.Tileset;
-import edu.princeton.cs.algs4.StdDraw;
+import edu.princeton.cs.introcs.StdDraw;
+import edu.princeton.cs.introcs.StdOut;
 
+import java.awt.*;
 import java.util.Random;
 
 public class Game {
+    public int seed = 1234;
     TERenderer ter = new TERenderer();
     /* Feel free to change the width and height. */
     public static final int WIDTH = 80;
@@ -20,15 +23,98 @@ public class Game {
      * Method used for playing a fresh game. The game should start from the main menu.
      */
     public void playWithKeyboard() {
-        TETile[][] world = generateWorld(1234);
+        startFrame();
+        gameFrame();
+
+        try {
+            Thread.sleep(1000000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
+
+    public void gameFrame() {
+        TETile[][] world = generateWorld(seed);
         this.player = generatePlayer(world);
         ter.renderFrame(world);
+        while(true){
+            if(StdDraw.hasNextKeyTyped()){
+                handleKeyPress(StdDraw.nextKeyTyped(), world);
+                ter.renderFrame(world);
+            }
+        }
+    }
 
+
+    private void getSeedFrame() {
+        drawSeed("");
+        StringBuilder sb = new StringBuilder();
         while (true) {
             if (StdDraw.hasNextKeyTyped()) {
                 char key = StdDraw.nextKeyTyped();
-                handleKeyPress(key, world);
-                ter.renderFrame(world);
+                if (key >= '0' && key <= '9') {
+                    sb.append(key);
+                } else if(key == '\n'){
+                    if(sb.toString().isEmpty()){
+                        break;
+                    }
+                    seed = Integer.parseInt(sb.toString());
+                    System.out.println("user's seed: " + seed);
+                    break;
+                }else if(key == '\b'){
+                    if(!sb.isEmpty()){
+                        sb.deleteCharAt(sb.length() - 1);
+                    }
+                }else{
+                    continue;
+                }
+                drawSeed(sb.toString());
+            }
+        }
+    }
+
+    private void drawSeed(String seed) {
+        StdDraw.clear(Color.black);
+        Font smallFont = new Font("Monaco", Font.BOLD, 25);
+        StdDraw.setFont(smallFont);
+        StdDraw.setPenColor(Color.WHITE);
+        StdDraw.text(WIDTH * 0.5, HEIGHT * 0.5, "Your seed: " + seed);
+        StdDraw.text(WIDTH * 0.5, HEIGHT * 0.4, "press enter to continue");
+        StdDraw.show();
+    }
+
+    public void startFrame() {
+        Font smallFont = new Font("Monaco", Font.BOLD, 45);
+        StdDraw.setFont(smallFont);
+        StdDraw.setPenColor(Color.WHITE);
+        StdDraw.text(WIDTH * 0.5, HEIGHT * 0.75, "CS61B: THE GAME");
+
+        Font bigFont = new Font("Monaco", Font.BOLD, 25);
+        StdDraw.setFont(bigFont);
+        StdDraw.setPenColor(Color.white);
+        StdDraw.text(WIDTH * 0.5, HEIGHT * 0.5, "New Game(N)");
+        StdDraw.text(WIDTH * 0.5, HEIGHT * 0.4, "Load Game(L)");
+        StdDraw.text(WIDTH * 0.5, HEIGHT * 0.3, "Quit Game(Q)");
+        StdDraw.show();
+
+        while (true) {
+            char key;
+            if (StdDraw.hasNextKeyTyped()) {
+                key = StdDraw.nextKeyTyped();
+            } else {
+                continue;
+            }
+            if (key == 'N' || key == 'n') {
+                System.out.println("New Game(N)");
+                getSeedFrame();
+                break;
+            } else if (key == 'L' || key == 'l') {
+                System.out.println("Load Game(L)");
+                break;
+            } else if (key == 'Q' || key == 'q') {
+                System.out.println("Quit Game(Q)");
+                break;
             }
         }
     }
@@ -44,28 +130,28 @@ public class Game {
         int y = player.y;
         if (key == 'W' || key == 'w') {
             System.out.println("w");
-            if (y + 1 < HEIGHT && world[x][y] == Tileset.FLOOR) {
+            if (y + 1 < HEIGHT && world[x][y + 1] == Tileset.FLOOR) {
                 world[x][y] = Tileset.FLOOR;
                 world[x][y + 1] = Tileset.PLAYER;
                 player.y++;
             }
         } else if (key == 'S' || key == 's') {
             System.out.println("s");
-            if (y - 1 > 0 && world[x][y] == Tileset.FLOOR) {
+            if (y - 1 > 0 && world[x][y - 1] == Tileset.FLOOR) {
                 world[x][y] = Tileset.FLOOR;
                 world[x][y - 1] = Tileset.PLAYER;
                 player.y--;
             }
         } else if (key == 'A' || key == 'a') {
             System.out.println("a");
-            if (x - 1 > 0 && world[x][y] == Tileset.FLOOR) {
+            if (x - 1 > 0 && world[x - 1][y] == Tileset.FLOOR) {
                 world[x][y] = Tileset.FLOOR;
                 world[x - 1][y] = Tileset.PLAYER;
                 player.x--;
             }
         } else if (key == 'D' || key == 'd') {
             System.out.println("d");
-            if (x + 1 < WIDTH && world[x][y] == Tileset.FLOOR) {
+            if (x + 1 < WIDTH && world[x + 1][y] == Tileset.FLOOR) {
                 world[x][y] = Tileset.FLOOR;
                 world[x + 1][y] = Tileset.PLAYER;
                 player.x++;
