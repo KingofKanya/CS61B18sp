@@ -38,8 +38,8 @@ public class Game {
         TETile[][] world = generateWorld(seed);
         this.player = generatePlayer(world);
         ter.renderFrame(world);
-        while(true){
-            if(StdDraw.hasNextKeyTyped()){
+        while (true) {
+            if (StdDraw.hasNextKeyTyped()) {
                 handleKeyPress(StdDraw.nextKeyTyped(), world);
                 ter.renderFrame(world);
             }
@@ -55,18 +55,18 @@ public class Game {
                 char key = StdDraw.nextKeyTyped();
                 if (key >= '0' && key <= '9') {
                     sb.append(key);
-                } else if(key == '\n'){
-                    if(sb.toString().isEmpty()){
+                } else if (key == '\n') {
+                    if (sb.toString().isEmpty()) {
                         break;
                     }
                     seed = Integer.parseInt(sb.toString());
                     System.out.println("user's seed: " + seed);
                     break;
-                }else if(key == '\b'){
-                    if(!sb.isEmpty()){
+                } else if (key == '\b') {
+                    if (sb.length() > 0) {
                         sb.deleteCharAt(sb.length() - 1);
                     }
-                }else{
+                } else {
                     continue;
                 }
                 drawSeed(sb.toString());
